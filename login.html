@@ -1,0 +1,312 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login Pasaxon</title>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <link rel="stylesheet" href="/fonts/fontawesome-pro-6-web/css/all.css">
+</head>
+<style>
+    @font-face {
+        font-family: "NotoSansLaoLooped";
+        src: url("fonts/NotoSansLaoLooped/NotoSansLaoLooped-Medium.woff2");
+        font-display: swap;
+        font-weight: 500;
+    }
+
+    @font-face {
+        font-family: "NotoSansLaoLooped";
+        src: url("fonts/NotoSansLaoLooped/NotoSansLaoLooped-Regular.woff2");
+        font-display: swap;
+        font-weight: 400;
+    }
+
+    @font-face {
+        font-family: "NotoSansLaoLooped";
+        src: url("fonts/NotoSansLaoLooped/NotoSansLaoLooped-Light.woff2");
+        font-display: swap;
+        font-weight: 300;
+    }
+
+    html {
+        font-size: 65.2% !important;
+    }
+
+    body {
+        font-family: "NotoSansLaoLooped";
+        margin: 0;
+        font-size: 1.4rem;
+        font-weight: 400;
+        line-height: 1.5;
+        color: #fff;
+        text-align: left;
+        background: url(img/login-cms.jpg) center center no-repeat;
+    }
+
+    .logo {
+        width: 427px;
+        height: 116px;
+        background: url(img/logo.png) center center/ 427px no-repeat;
+        display: block;
+        font-size: 0;
+        margin-bottom: 80px;
+    }
+
+    .title {
+        font-size: 44px;
+        font-weight: 400;
+        margin-bottom: 16px;
+        margin-top: 0;
+    }
+
+    .wrapper {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        height: 100vh;
+    }
+
+    .form-wrapper {
+        display: inline-flex;
+        padding: 40px 80px;
+        flex-direction: column;
+        align-items: center;
+        gap: 16px;
+        border-radius: 28px;
+        border: 2px solid rgba(88, 130, 193, 0.49);
+        background: rgba(88, 130, 193, 0.28);
+        backdrop-filter: blur(8.893229484558105px);
+    }
+
+    .text {
+        font-size: 18px;
+        font-weight: 300;
+        margin-top: 0;
+        margin-bottom: 0;
+    }
+
+    .feedback {
+        color: #FFC700;
+        font-weight: 300;
+        font-size: 13px;
+    }
+
+    .register {
+        font-weight: 300;
+        font-size: 14px;
+    }
+
+    .register a {
+        font-weight: 300;
+        color: #fff;
+        transition: all .3s;
+    }
+
+    .register a:hover {
+        color: #FFC700;
+    }
+
+    .wrap {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        font-size: 14px;
+        font-weight: 300;
+        width: 100%;
+    }
+
+    .wrap a {
+        color: #fff;
+        font-weight: 300;
+        transition: all .3s;
+        font-size: 14px;
+    }
+
+    .wrap a:hover {
+        color: #FFC700;
+    }
+
+    .form-group {
+        display: flex;
+        flex-direction: column;
+        gap: 8px;
+        width: 100%;
+    }
+    
+    .form-group .input-pw {
+        position: relative;
+        width: 100%;
+    }
+
+    .form-group .input-pw i {
+        position: absolute;
+        color: #8C8C8C;
+        font-weight: 300;
+        right: 8px;
+        bottom: 5px;
+        width: 20px;
+        height: 20px;
+        display: inline-flex;
+        justify-content: center;
+        align-items: center;
+    }
+
+    .form-group i:hover {
+        cursor: pointer;
+    }
+
+    .form-group input {
+        display: flex;
+        width: 100%;
+        height: 32px;
+        padding: 0 8px;
+        justify-content: space-between;
+        align-items: center;
+        border-radius: 6px;
+        border: 1px solid #BCBEC0;
+        background: #FFF;
+        outline: none;
+        box-sizing: border-box;
+        font-size: 14px;
+    }
+
+    .form-group label {
+        font-size: 14px;
+        font-weight: 300;
+    }
+
+    .btn-send {
+        display: flex;
+        width: 100%;
+        height: 40px;
+        justify-content: center;
+        align-items: center;
+        border-radius: 6px;
+        background: #003465;
+        color: #fff;
+        border: none;
+        font-size: 16px;
+        transition: all .3s;
+    }
+
+    .btn-send:hover {
+        cursor: pointer;
+        background: #003e79;
+    }
+
+    /* 540 */
+    @media (max-width: 540px) {
+        body {
+            padding: 0 16px;
+            margin-left: auto;
+            margin-right: auto;
+            background: url(img/login-cms.jpg) -500px center no-repeat;
+        }
+
+        .logo {
+            width: 320px;
+            height: 87px;
+            background: url(img/logo.png) center center/ 320px no-repeat;
+            margin-bottom: 50px;
+        }
+
+        .title {
+            font-size: 32px;
+            margin-bottom: 16px;
+        }
+
+        .text {
+            font-size: 15px;
+        }
+
+        .form-wrapper {
+            padding: 24px;
+            gap: 16px;
+            border-radius: 16px;
+            max-width: calc(100% - 30px);
+        }
+
+        .recaptcha {
+            transform: scale(0.881579);
+        }
+    }
+
+    /* 320 */
+    @media (max-width: 320px) {
+        .text {
+            font-size: 13px;
+        }
+    }
+
+</style>
+
+<body>
+    <div class="wrapper">
+        <div class="logo">
+            logo
+        </div>
+        <h2 class="title">ຍິນດີຕ້ອນຮັບສູ່ CMS</h2>
+        <form class="form-wrapper">
+            <p class="text">ເຂົ້າສູ່ລະບົບດ້ວຍຊື່ຜູ້ໃຊ້ແລະລະຫັດຜ່ານຂອງທ່ານ.</p>
+            <div class="register">ຜູ້ໃຊ້ໃຫມ່? <a href="register.html">ສ້າງ​ບັນ​ຊີ</a></div>  
+            <div class="form-group">
+                <label for="username">ເຂົ້າ​ສູ່​ລະ​ບົບ</label>
+                <input type="text" placeholder="" id="username">
+                <small class="feedback">ກະລຸນາໃສ່ບັນຊີ!</small>
+            </div>
+            <div class="form-group">
+                <label for="password">ລະຫັດຜ່ານ</label>
+                <div class="input-pw">
+                    <input type="password" placeholder="" id="password">
+                    <i class="far fa-eye-slash toggle-password"></i>
+                </div>
+                <small class="feedback">ກະລຸນາໃສ່ລະຫັດຜ່ານ!</small>
+            </div>
+            <div class="wrap">
+                <div>
+                    <input name="" type="checkbox" value=""/>
+                    <span>ຈື່​ຂ້ອຍ</span>
+                </div>
+                <a href="forget-password.html">ລືມລະຫັດຜ່ານ?</a>
+            </div>
+            <div class="recaptcha">
+                <script src="https://www.google.com/recaptcha/api.js?hl=vi"></script>
+                <div class="g-recaptcha" data-sitekey="6LcBz7wZAAAAAOvKwBd7row6t1IOfuSfGbcHGyCV">
+                    <div style="width: 304px; height: 78px;">
+                        <div><iframe title="reCAPTCHA" width="304" height="78" role="presentation" name="a-bnu9kv93u64b"
+                                frameborder="0" scrolling="no"
+                                sandbox="allow-forms allow-popups allow-same-origin allow-scripts allow-top-navigation allow-modals allow-popups-to-escape-sandbox allow-storage-access-by-user-activation"
+                                src="https://www.google.com/recaptcha/api2/anchor?ar=1&amp;k=6LcBz7wZAAAAAOvKwBd7row6t1IOfuSfGbcHGyCV&amp;co=aHR0cHM6Ly93d3cuc2dncC5vcmcudm46NDQz&amp;hl=vi&amp;v=9pvHvq7kSOTqqZusUzJ6ewaF&amp;size=normal&amp;cb=i0m8wmoyr2ym"></iframe>
+                        </div><textarea id="g-recaptcha-response" name="g-recaptcha-response"
+                            class="g-recaptcha-response"
+                            style="width: 250px; height: 40px; border: 1px solid rgb(193, 193, 193); margin: 10px 25px; padding: 0px; resize: none; display: none;"></textarea>
+                    </div><iframe style="display: none;"></iframe>
+                </div>
+            </div>
+            <button class="btn-send">ເຂົ້າ​ສູ່​ລະ​ບົບ</button>
+        </form>
+    </div>
+
+    <script>
+        $(document).ready(function () {
+            $('.toggle-password').click(function () {
+                var passwordField = $('#password');
+                var toggleIcon = $(this);
+
+                if (passwordField.attr('type') === 'password') {
+                    passwordField.attr('type', 'text');
+                    toggleIcon.removeClass('far fa-eye-slash').addClass('far fa-eye');
+                } else {
+                    passwordField.attr('type', 'password');
+                    toggleIcon.removeClass('far fa-eye').addClass('far fa-eye-slash');
+                }
+            });
+        });
+    </script>
+
+</body>
+
+</html>

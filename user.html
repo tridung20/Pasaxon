@@ -1,0 +1,975 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login Pasaxon</title>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <link rel="stylesheet" href="/fonts/fontawesome-pro-6-web/css/all.css">
+</head>
+<style>
+    @font-face {
+        font-family: "NotoSansLaoLooped";
+        src: url("fonts/NotoSansLaoLooped/NotoSansLaoLooped-Medium.woff2");
+        font-display: swap;
+        font-weight: 500;
+    }
+
+    @font-face {
+        font-family: "NotoSansLaoLooped";
+        src: url("fonts/NotoSansLaoLooped/NotoSansLaoLooped-Regular.woff2");
+        font-display: swap;
+        font-weight: 400;
+    }
+
+    @font-face {
+        font-family: "NotoSansLaoLooped";
+        src: url("fonts/NotoSansLaoLooped/NotoSansLaoLooped-Light.woff2");
+        font-display: swap;
+        font-weight: 300;
+    }
+
+    html {
+        font-size: 65.2% !important;
+    }
+
+    body {
+        font-family: "NotoSansLaoLooped";
+        margin: 0;
+        font-size: 1.4rem;
+        font-weight: 400;
+        line-height: 1.5;
+        color: #fff;
+        text-align: left;
+        background: url(img/login-cms.jpg) center center no-repeat;
+    }
+
+    .logo {
+        width: 427px;
+        height: 116px;
+        background: url(img/logo.png) center center/ 427px no-repeat;
+        display: block;
+        font-size: 0;
+        margin-bottom: 80px;
+    }
+
+    .title {
+        font-size: 44px;
+        font-weight: 400;
+        margin-bottom: 16px;
+        margin-top: 0;
+    }
+
+    .container {
+        height: 100vh;
+        margin: 0 auto;
+        width: 1170px;
+    }
+
+    @media (min-width: 1024px) and (max-width: 1200px) {
+        .container {
+            width: 980px;
+        }
+    }
+
+    @media (min-width: 768px) and (max-width: 1024px) {
+        .container {
+            width: 730px;
+        }
+    }
+
+    .user-wrap {
+        display: grid;
+        grid-template-columns: 300px 1fr;
+        column-gap: 30px;
+        width: 1170px;
+        margin: 0 auto;
+        padding-top: 160px;
+    }
+
+    @media (min-width: 768px) and (max-width: 1024px) {
+        .user-wrap {
+            grid-template-columns: 240px 1fr;
+            gap: 20px;
+        }
+    }
+
+    @media (min-width: 1024px) and (max-width: 1200px) {
+        .user-wrap {
+            width: 980px;
+        }
+    }
+
+    @media (min-width: 768px) and (max-width: 1024px) {
+        .user-wrap {
+            grid-template-columns: 220px 1fr;
+            width: 730px;
+        }
+    }
+
+    .user-wrap .tablinks {
+        color: #343a40;
+        font-size: 16px;
+        font-weight: 400;
+        line-height: 1.5;
+        text-transform: normal;
+        border-left: 2px solid transparent;
+    }
+
+    .user-wrap .tablinks:hover,
+    .user-wrap .tablinks.active {
+        background: rgba(152, 7, 0, 0.04);
+    }
+
+    .user-wrap .tablinks.active {
+        border-left-color: #980700;
+        color: #980700;
+    }
+
+    .user-wrap .tablinks i {
+        font-size: 20px;
+        color: #980700;
+        margin-right: 12px;
+        width: 24px;
+        vertical-align: sub;
+    }
+
+    .user-wrap .tabcontent {
+        display: none;
+    }
+
+    .user-wrap .tabcontent.active {
+        display: block;
+    }
+
+    .user-info {
+        display: flex;
+        height: fit-content;
+        padding: 24px;
+        flex-direction: column;
+        align-items: center;
+        border-radius: 10px;
+        border: 1px solid #ced4da;
+        background: #fff;
+    }
+
+    .user-info .tabs {
+        padding-top: 12px;
+        margin-top: 12px;
+        border-top: 1px solid #ced4da;
+        width: 100%;
+    }
+
+    .user-info .tabs a {
+        display: flex;
+        width: 100%;
+        height: 52px;
+        padding: 0 20px;
+        align-items: center;
+        text-decoration: none;
+    }
+
+    @media (min-width: 768px) and (max-width: 1024px) {
+        .user-info .tabs a {
+            padding: 0 14px;
+        }
+    }
+
+    .user-info .avatar {
+        display: flex;
+        gap: 8px;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+    }
+
+    .user-info .avatar #profile-avatar {
+        width: 140px;
+        min-width: 140px;
+        height: 140px;
+        position: relative;
+        border-radius: 50%;
+    }
+
+    .user-info .avatar #profile-avatar i {
+        position: absolute;
+        bottom: 4px;
+        right: 16px;
+        width: 24px;
+        height: 24px;
+    }
+
+    .user-info .avatar #profile-avatar img {
+        width: 100%;
+        height: 100%;
+        border-radius: 50%;
+    }
+
+    .user-info .avatar .image-upload {
+        position: relative;
+    }
+
+    .user-info .avatar .image-upload:hover {
+        cursor: pointer;
+    }
+
+    .user-info .avatar .image-upload .custom-file-upload {
+        font-size: 16px;
+        color: #3d8bfd;
+        margin-bottom: 0;
+    }
+
+    .user-info .avatar .image-upload input {
+        width: 100%;
+        opacity: 0;
+        position: absolute;
+        left: 0px;
+        top: 0px;
+    }
+
+    .user-info .avatar .wrap-name {
+        position: relative;
+    }
+
+    .user-info .avatar .name {
+        display: flex;
+        align-items: center;
+        color: #212529;
+        font-size: 20px;
+        font-weight: 500;
+        line-height: 26px;
+        margin: 0;
+        text-transform: capitalize;
+    }
+
+    .user-info .avatar .name i {
+        margin-left: 6px;
+    }
+
+    .user-info .avatar [class^="ic-"] {
+        color: #980700;
+        border-radius: 50%;
+        width: 20px;
+    }
+
+    .user-info .avatar .checked {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        padding: 3px;
+        color: #fff;
+        background: #198754;
+        border-radius: 50%;
+    }
+
+    .user-info .avatar .checked::before {
+        font-size: 18px;
+    }
+
+    .user-info .avatar .uncheck {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        width: 18px;
+        height: 18px;
+        padding: 3px;
+        color: #fff;
+        background: #dc3545;
+        border-radius: 50%;
+    }
+
+    .user-info .avatar .uncheck::before {
+        font-size: 14px;
+    }
+
+    .user-overview {
+        padding: 30px;
+        flex-direction: column;
+        border-radius: 10px;
+        border: 1px solid #ced4da;
+        background: #fff;
+    }
+
+    .user-overview .box-content::after {
+        content: "";
+        display: table;
+        clear: both;
+    }
+
+    .user-overview .form-group {
+        display: flex;
+        align-items: center;
+        margin-bottom: 24px;
+        height: 50px;
+    }
+
+    .user-overview .form-group label {
+        color: #343a40;
+        font-size: 16px;
+        font-weight: 500;
+        line-height: 1.5;
+        font-family: "NotoSansLaoLooped";
+        width: 140px;
+        min-width: 140px;
+        margin-right: 20px;
+        margin-bottom: 0 !important;
+    }
+
+    .user-overview .form-group label span {
+        color: #dc3545;
+    }
+
+    .user-overview .form-group select {
+        appearance: none;
+        -webkit-appearance: none;
+        background: url("../img/arrow-down.svg") right 8px center no-repeat;
+        width: 24px;
+        height: 24px;
+    }
+
+    .user-overview .form-group select:hover {
+        cursor: pointer;
+    }
+
+    .user-overview .form-group input {}
+
+    .user-overview .form-group .form-control {
+        display: flex;
+        height: 50px;
+        align-items: center;
+        width: 100%;
+        padding: 0 16px;
+        border: 1px solid #ddd;
+        box-shadow: none;
+        border-radius: 4px;
+        font-size: 16px;
+        color: #212529;
+    }
+
+    .user-overview .form-group .form-control::placeholder {
+        color: #98A2B3;
+    }
+
+    /* .user-overview .form-group .form-control:focus {
+        border: 1px solid var(--gray-600);
+    } */
+
+    .user-overview .group-select {
+        width: 100%;
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 20px;
+    }
+
+    .user-overview .btn {
+        margin: 20px auto 0;
+    }
+
+    .user-overview .btn-submit {
+        font-size: 16px;
+        color: #fff;
+        font-weight: 500;
+        text-transform: uppercase;
+        display: block;
+        width: 100%;
+        height: 44px;
+        background: var(--primary, #980700);
+        border-radius: 4px;
+        outline: none;
+        border: none;
+        transition: all .3s;
+    }
+
+    .user-overview .btn-submit:hover {
+        cursor: pointer;
+        filter: brightness(0.8);
+    }
+
+    .user-overview .tab-profile .form-group:nth-child(2) {
+        margin-bottom: 30px;
+        padding-bottom: 30px;
+        border-bottom: 8px solid var(--gray-100);
+    }
+
+    @media (min-width: 768px) and (max-width: 1024px) {
+        .user-overview .tab-profile .form-group:nth-child(2) {
+            margin-bottom: 20px;
+            padding-bottom: 20px;
+        }
+    }
+
+    .user-overview .tab-history {
+        max-height: 600px;
+        overflow-y: scroll;
+    }
+
+    .user-overview .tab-history::-webkit-scrollbar-track {
+        -webkit-box-shadow: inset 0 0 4px #EAEAEA;
+        border-radius: 6px;
+        background-color: #EAEAEA;
+    }
+
+    .user-overview .tab-history::-webkit-scrollbar {
+        width: 4px;
+        background: #98A2B3;
+    }
+
+    .user-overview .tab-history::-webkit-scrollbar-thumb {
+        border-radius: 6px;
+        background-color: #98A2B3;
+    }
+
+    .user-overview .tab-history .box-content {
+        display: flex;
+        flex-direction: column;
+        gap: 30px;
+    }
+
+    .user-overview .tab-history .box-content .story {
+        display: grid;
+        grid-template-columns: 140px 150px 1fr;
+        column-gap: 20px;
+    }
+
+    @media (max-width: 1024px) {
+        .user-overview .tab-history .box-content .story {
+            grid-template-columns: 1fr;
+            grid-template-rows: 20px 1fr;
+            gap: 16px;
+        }
+    }
+
+    .user-overview .tab-history .box-content .story .time {
+        color: #343a40;
+        font-size: 16px;
+        font-weight: 400;
+        line-height: 1.5;
+        position: relative;
+    }
+
+    .more-news {
+        min-height: 42px;
+        width: 190px;
+        padding: 0 16px;
+        border-radius: 50px;
+        background: var(--primary, #980700);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        margin: 0 auto;
+        color: var(--white, #fff);
+        font-size: 16px;
+        font-weight: 500;
+        border: none;
+        transition: .3s;
+    }
+
+    .more-news:hover {
+        cursor: pointer;
+        opacity: .8;
+    }
+
+    @media (min-width: 768px) and (max-width: 1024px) {
+        .user-overview .tab-history .box-content .story .time:after {
+            content: "";
+            width: 100%;
+            height: 1px;
+            background-color: #ddd;
+            position: relative;
+        }
+    }
+
+    .user-overview .tab-history .box-content .story__thumb {
+        margin: 0;
+        width: 150px;
+        height: 100px;
+        margin-bottom: 0 !important;
+        overflow: visible;
+    }
+
+    .user-overview .tab-history .box-content .story__heading {
+        margin: 0;
+    }
+
+    .user-overview .tab-history .box-content .story__heading a {
+        text-decoration: none;
+        font-size: 18px;
+        color: #212529;
+        font-weight: 500;
+    }
+
+    /* 540 */
+    @media (max-width: 540px) {
+        body {
+            padding: 0 16px;
+            margin-left: auto;
+            margin-right: auto;
+            background: url(img/login-cms.jpg) -500px center no-repeat;
+        }
+
+        .container {
+            width: 100%;
+        }
+
+        .user-wrap {
+            width: 100%;
+            grid-template-columns: 1fr;
+            margin-top: 20px;
+            padding-top: 0;
+            /* border: 1px solid #ced4da; */
+            border-radius: 10px;
+            overflow: hidden;
+        }
+
+        .user-info, .user-overview {
+            border: 0;
+            border-bottom: 1px solid #ced4da;
+            border-radius: 0;
+        }
+
+        .user-info {
+            padding-bottom: 12px;
+        }
+
+        .user-info .avatar {
+            display: grid;
+            grid-template-columns: 60px 1fr;
+            column-gap: 20px;
+            row-gap: 0;
+        }
+
+        .user-info .tabs {
+            display: flex;
+        }
+
+        .user-info .avatar #profile-avatar {
+            width: 60px;
+            height: 60px;
+            min-width: 60px;
+            grid-column: 1/2;
+            grid-row: 1/3;
+        }
+
+        .user-info .avatar #profile-avatar i {
+            bottom: 0px;
+            right: -6px;
+            width: 16px;
+            height: 16px;
+        }
+
+        .user-info .avatar .checked::before {
+            font-size: 14px;
+        }
+
+        .user-info .avatar .wrap-name {
+            grid-column: 2/3;
+            grid-row: 1/2;
+        }
+
+        .user-overview {
+            padding: 12px 24px 24px 24px;
+        }
+
+        .user-overview .form-group {
+            flex-direction: column;
+            align-items: flex-start;
+            height: initial;
+            gap: 8px;
+            margin-bottom: 12px;
+        }
+
+        .user-overview .tab-profile .form-group:nth-child(2) {
+            margin-bottom: 12px;
+            padding-bottom: 0;
+            border: none;
+        }
+
+        .user-overview .form-group .form-control {
+            box-sizing: border-box;
+            height: 40px;
+            padding: 0 12px;
+        }
+
+        .user-overview .tab-history .box-content {
+            gap: 16px;
+        }
+
+        .user-overview .tab-history .box-content .story {
+            gap: 8px;
+            padding-bottom: 12px;
+            border-bottom: 1px solid #ddd;
+        }
+
+        .user-overview .tab-history .box-content .story:last-child {
+            border-bottom: none;
+            padding-bottom: 0;
+        }
+    }
+
+    /* 320 */
+    @media (max-width: 320px) {
+        .text {
+            font-size: 13px;
+        }
+    }
+</style>
+
+<body>
+    <div class="container">
+        <div class="user-wrap">
+            <div class="user-info">
+                <div class="avatar">
+                    <div id="profile-avatar">
+                        <img src="../../img/no-ava.png" alt="120x120 (~1:1)" />
+                        <i class="fa-regular fa-check checked" title="Đã duyệt"></i>
+                    </div>
+                    <div class="image-upload">
+                        <label for="file-upload" class="custom-file-upload">ແກ້ໄຂຮູບພາບ</label>
+                        <input id="file-upload" type="file" />
+                    </div>
+                    <div class="wrap-name">
+                        <p class="name">
+                            Bùi Trí Dũng
+                            <i class="fa-regular fa-check uncheck" title="Đang chờ duyệt"></i>
+                        </p>
+                    </div>
+                </div>
+                <div class="tabs">
+                    <a href="#" class="tablinks active" data-electronic="tabProfile">
+                        ຂໍ້​ມູນ​ບັນ​ຊີ
+                    </a>
+                    <a href="#" class="tablinks" data-electronic="tabHistory">
+                        ບົດຄວາມທີ່ຈັດພີມມາ
+                    </a>
+                </div>
+                <div class="tabs">
+                    <a href="#" class="tablinks" data-electronic="tabPass">
+                        ປ່ຽນ​ລະ​ຫັດ​ຜ່ານ
+                    </a>
+                    <a href="#" class="tablinks">ອອກ​ຈາກ​ລະ​ບົບ</a>
+                </div>
+            </div>
+            <div class="user-overview">
+                <div id="tabProfile" class="tabcontent tab-profile active">
+                    <div class="box-content">
+                        <div class="form-group">
+                            <label for="">ຊື່ ແລະນາມສະກຸນ</label>
+                            <input type="text" class="form-control" value="Bùi Trí Dũng" />
+                        </div>
+                        <div class="form-group">
+                            <label for="">ອີເມວ</label>
+                            <input type="email" class="form-control" value="tridung20@gmail.com" disabled />
+                        </div>
+                        <div class="form-group">
+                            <label for="">ເບີ​ໂທລະ​ສັບ</label>
+                            <input type="number" class="form-control" placeholder="ໃສ່ເບີໂທລະສັບຂອງເຈົ້າ" />
+                        </div>
+                        <div class="form-group">
+                            <label for="">ເພດ</label>
+                            <select class="form-control">
+                                <option selected>ເລືອກເພດ</option>
+                                <option value="1">ຜູ້ຊາຍ</option>
+                                <option value="2">ຜູ້ຍິງ</option>
+                                <option value="3">ອື່ນໆ</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label for="">ວັນ​ເດືອນ​ປີ​ເກີດ</label>
+                            <div class="group-select">
+                                <select class="form-control">
+                                    <option selected>ມື້</option>
+                                    <option value="1">01</option>
+                                    <option value="2">02</option>
+                                    <option value="3">03</option>
+                                </select>
+                                <select class="form-control">
+                                    <option selected>ເດືອນ</option>
+                                    <option value="1">01</option>
+                                    <option value="2">02</option>
+                                    <option value="3">03</option>
+                                </select>
+                                <select class="form-control">
+                                    <option selected>ປີ</option>
+                                    <option value="1">2023</option>
+                                    <option value="2">2022</option>
+                                    <option value="3">2021</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="">ທີ່ຢູ່</label>
+                            <input type="text" class="form-control" placeholder="ໃສ່ທີ່ຢູ່ຂອງເຈົ້າ" />
+                        </div>
+                        <button type="button" class="btn-submit">ອັບເດດ</button>
+                    </div>
+                </div>
+                <div id="tabHistory" class="tabcontent tab-history">
+                    <div class="box-content">
+                        <article class="story">
+                            <time class="time">07:54 21/11/2022</time>
+                            <figure class="story__thumb">
+                                <a href="#">
+                                    <img src="https://placehold.co/150x100" alt="150x100 (~3:2)" />
+                                </a>
+                            </figure>
+                            <h2 class="story__heading">
+                                <a href="#">
+                                    ຂ່າວດ່ວນ: ຢຸດການທ່ອງທ່ຽວຊົ່ວຄາວ; ປອມຕົວເປັນທະນາຍຄວາມເພື່ອຫລອກລວງເງິນຫຼາຍຕື້
+                                </a>
+                            </h2>
+                        </article>
+                        <article class="story">
+                            <time class="time">07:54 21/11/2022</time>
+                            <figure class="story__thumb">
+                                <a href="#">
+                                    <img src="https://placehold.co/150x100" alt="150x100 (~3:2)" />
+                                </a>
+                            </figure>
+                            <h2 class="story__heading">
+                                <a href="#">
+                                    ຂ່າວດ່ວນ: ຢຸດການທ່ອງທ່ຽວຊົ່ວຄາວ; ປອມຕົວເປັນທະນາຍຄວາມເພື່ອຫລອກລວງເງິນຫຼາຍຕື້
+                                </a>
+                            </h2>
+                        </article>
+                        <article class="story">
+                            <time class="time">07:54 21/11/2022</time>
+                            <figure class="story__thumb">
+                                <a href="#">
+                                    <img src="https://placehold.co/150x100" alt="150x100 (~3:2)" />
+                                </a>
+                            </figure>
+                            <h2 class="story__heading">
+                                <a href="#">
+                                    ຂ່າວດ່ວນ: ຢຸດການທ່ອງທ່ຽວຊົ່ວຄາວ; ປອມຕົວເປັນທະນາຍຄວາມເພື່ອຫລອກລວງເງິນຫຼາຍຕື້
+                                </a>
+                            </h2>
+                        </article>
+                        <article class="story">
+                            <time class="time">07:54 21/11/2022</time>
+                            <figure class="story__thumb">
+                                <a href="#">
+                                    <img src="https://placehold.co/150x100" alt="150x100 (~3:2)" />
+                                </a>
+                            </figure>
+                            <h2 class="story__heading">
+                                <a href="#">
+                                    ຂ່າວດ່ວນ: ຢຸດການທ່ອງທ່ຽວຊົ່ວຄາວ; ປອມຕົວເປັນທະນາຍຄວາມເພື່ອຫລອກລວງເງິນຫຼາຍຕື້
+                                </a>
+                            </h2>
+                        </article>
+                        <article class="story">
+                            <time class="time">07:54 21/11/2022</time>
+                            <figure class="story__thumb">
+                                <a href="#">
+                                    <img src="https://placehold.co/150x100" alt="150x100 (~3:2)" />
+                                </a>
+                            </figure>
+                            <h2 class="story__heading">
+                                <a href="#">
+                                    ຂ່າວດ່ວນ: ຢຸດການທ່ອງທ່ຽວຊົ່ວຄາວ; ປອມຕົວເປັນທະນາຍຄວາມເພື່ອຫລອກລວງເງິນຫຼາຍຕື້
+                                </a>
+                            </h2>
+                        </article>
+                        <article class="story">
+                            <time class="time">07:54 21/11/2022</time>
+                            <figure class="story__thumb">
+                                <a href="#">
+                                    <img src="https://placehold.co/150x100" alt="150x100 (~3:2)" />
+                                </a>
+                            </figure>
+                            <h2 class="story__heading">
+                                <a href="#">
+                                    ຂ່າວດ່ວນ: ຢຸດການທ່ອງທ່ຽວຊົ່ວຄາວ; ປອມຕົວເປັນທະນາຍຄວາມເພື່ອຫລອກລວງເງິນຫຼາຍຕື້
+                                </a>
+                            </h2>
+                        </article>
+                        <article class="story">
+                            <time class="time">07:54 21/11/2022</time>
+                            <figure class="story__thumb">
+                                <a href="#">
+                                    <img src="https://placehold.co/150x100" alt="150x100 (~3:2)" />
+                                </a>
+                            </figure>
+                            <h2 class="story__heading">
+                                <a href="#">
+                                    ຂ່າວດ່ວນ: ຢຸດການທ່ອງທ່ຽວຊົ່ວຄາວ; ປອມຕົວເປັນທະນາຍຄວາມເພື່ອຫລອກລວງເງິນຫຼາຍຕື້
+                                </a>
+                            </h2>
+                        </article>
+                    </div>
+                    <button type="button" class="more-news">ເບິ່ງເພີ່ມເຕີມ</button>
+                </div>
+                <div id="tabBookmark" class="tabcontent tab-bookmark">
+                    <div class="box-content">
+                        @@for (var i = 0; i < 8; i++) { <article class="story">
+                            <time class="time">07:54 21/11/2022</time>
+                            <figure class="story__thumb">
+                                <a href="#">
+                                    <img src="https://placehold.co/150x100" alt="150x100 (~3:2)" />
+                                </a>
+                            </figure>
+                            <h2 class="story__heading">
+                                <a href="#">
+                                    ຂ່າວດ່ວນ: ຢຸດການທ່ອງທ່ຽວຊົ່ວຄາວ; ປອມຕົວເປັນທະນາຍຄວາມເພື່ອຫລອກລວງເງິນຫຼາຍຕື້
+                                </a>
+                            </h2>
+                            </article>
+                            }
+                    </div>
+                    <button type="button" class="more-news">ເບິ່ງເພີ່ມເຕີມ</button>
+                </div>
+                <div id="tabCommented" class="tabcontent tab-comment">
+                    <div class="box-content">
+                        @@for (var i = 0; i < 8; i++) { <article class="story">
+                            <time class="time">07:54 21/11/2022</time>
+                            <div class="name">Trí Dũng</div>
+                            <div class="text">
+                                Việc xích chân để đảm bảo an toàn cho người chăm sóc là cần thiết,
+                                nhưng, nếu xiềng xích voi trong một thời gian dài sẽ khiến voi căng
+                                thẳng và ảnh hưởng đến sức khỏe.
+                            </div>
+                            <div class="action">
+                                <span class="like">5 Thích </span>
+                                <span class="reply">3 Trả lời</span>
+                            </div>
+                            <a href="#" class="link">Chủ tịch HĐND TPHCM Nguyễn Thị Lệ: Xây dựng quy trình phối hợp thúc
+                                đẩy tiến độ dự án đầu tư công</a>
+                            </article>
+                            }
+                    </div>
+                    <button type="button" class="more-news">ເບິ່ງເພີ່ມເຕີມ</button>
+                </div>
+                <div id="tabPayment" class="tabcontent tab-payment">
+                    <div class="payment-status">
+                        <p class="title">Trạng thái thanh toán của bạn</p>
+                        <p class="text">
+                            Bạn chưa có thanh toán nào gần đây, đăng ký ngay để đọc các bài viết
+                            hữu ích trên báo
+                        </p>
+                        <button type="submit" class="btn-buy">
+                            <i class="ic-cart"></i>
+                            Mua ngay
+                        </button>
+                    </div>
+                    <div class="payment-history">
+                        <p class="title">Lịch sử thanh toán</p>
+                        <table class="table">
+                            <thead>
+                                <tr>
+                                    <th>#</th>
+                                    <th>Thời gian</th>
+                                    <th>Gói / tên bài</th>
+                                    <th>Mã thanh toán</th>
+                                    <th>Giá tiền</th>
+                                    <th>Trạng thái</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>1</td>
+                                    <td>16/04/2024 15:10</td>
+                                    <td>
+                                        Quang cảnh bên ngoài phòng xét xử cựu Tổng thống Mỹ Donald Trump
+                                    </td>
+                                    <td>1-34452-7103-042024</td>
+                                    <td>5.000</td>
+                                    <td>Thành công</td>
+                                </tr>
+                                <tr>
+                                    <td>2</td>
+                                    <td>16/04/2024 15:10</td>
+                                    <td>
+                                        Quang cảnh bên ngoài phòng xét xử cựu Tổng thống Mỹ Donald Trump
+                                    </td>
+                                    <td>1-34452-7103-042024</td>
+                                    <td>5.000</td>
+                                    <td>Thành công</td>
+                                </tr>
+                                <tr>
+                                    <td>3</td>
+                                    <td>16/04/2024 15:10</td>
+                                    <td>
+                                        Quang cảnh bên ngoài phòng xét xử cựu Tổng thống Mỹ Donald Trump
+                                    </td>
+                                    <td>1-34452-7103-042024</td>
+                                    <td>5.000</td>
+                                    <td>Thành công</td>
+                                </tr>
+                                <tr>
+                                    <td>4</td>
+                                    <td>16/04/2024 15:10</td>
+                                    <td>
+                                        Quang cảnh bên ngoài phòng xét xử cựu Tổng thống Mỹ Donald Trump
+                                    </td>
+                                    <td>1-34452-7103-042024</td>
+                                    <td>5.000</td>
+                                    <td>Đang xử lý</td>
+                                </tr>
+                                <tr>
+                                    <td>5</td>
+                                    <td>16/04/2024 15:10</td>
+                                    <td>
+                                        Quang cảnh bên ngoài phòng xét xử cựu Tổng thống Mỹ Donald Trump
+                                    </td>
+                                    <td>1-34452-7103-042024</td>
+                                    <td>5.000</td>
+                                    <td>Lỗi</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+                <div id="tabPass" class="tabcontent tab-password">
+                    <div class="box-content">
+                        <div class="form-group">
+                            <label for="">ອີເມວ</label>
+                            <input type="email" class="form-control" value="tridung20@gmail.com" disabled />
+                        </div>
+                        <div class="form-group">
+                            <label for="">ລະ​ຫັດ​ປັດ​ຈຸ​ບັນ <span>*</span> </label>
+                            <input type="password" class="form-control" placeholder="ໃສ່ລະຫັດຜ່ານປະຈຸບັນ" />
+                        </div>
+                        <div class="form-group">
+                            <label for="">ລະຫັດຜ່ານໃໝ <span>*</span> </label>
+                            <input type="password" class="form-control" placeholder="ໃສ່ລະຫັດຜ່ານໃໝ່ຂອງເຈົ້າ" />
+                        </div>
+                        <div class="form-group">
+                            <label for="">ລະຫັດຜ່ານໃໝ <span>*</span> </label>
+                            <input type="password" class="form-control" placeholder="ໃສ່ລະຫັດຜ່ານໃໝ່ຂອງເຈົ້າ" />
+                        </div>
+                        <button type="button" class="btn-submit">ອັບເດດ</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // INFO Tabs
+
+        /*--- Tabs ---*/
+        var tabLinks = document.querySelectorAll(".tablinks");
+        var tabContent = document.querySelectorAll(".tabcontent");
+
+        tabLinks.forEach(function (el) {
+            el.addEventListener("click", openTabs);
+        });
+
+        function openTabs(el) {
+            var btn = el.currentTarget;
+            var electronic = btn.dataset.electronic;
+
+            tabContent.forEach(function (el) {
+                el.classList.remove("active");
+            });
+            tabLinks.forEach(function (el) {
+                el.classList.remove("active");
+            });
+            document.querySelector("#" + electronic).classList.add("active");
+            btn.classList.add("active");
+        }
+    </script>
+</body>
+
+</html>
